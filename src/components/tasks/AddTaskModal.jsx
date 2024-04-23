@@ -1,4 +1,4 @@
-import { set, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import Modal from "../ui/Modal";
 
 const AddTaskModal = ({ isOpen, setIsOpen }) => {
@@ -9,6 +9,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
   }
   const onSubmit = (data) => {
     console.log(data);
+    onCancel()
   };
   return (
     <div>
@@ -60,13 +61,13 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
               id="priority"
               {...register("priority")}
             >
-              <option value="Saikat">Saikat</option>
-              <option value="tawhid">tawhid</option>
-              <option value="islam">islam</option>
+              <option value="High">High</option>
+              <option value="medium">medium</option>
+              <option value="low">low</option>
             </select>
           </div>
           <div className="flex justify-end gap-4 my-5">
-            <button onClick={onCancel} type="submit" className="btn btn-danger">
+            <button onClick={()=>onCancel()} type="submit" className="btn btn-danger">
               Cancel
             </button>
             <button type="submit" className="btn btn-primary">
