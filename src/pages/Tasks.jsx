@@ -3,9 +3,12 @@ import MyTasks from "../components/tasks/MyTasks";
 import TaskCard from "../components/tasks/TaskCard";
 import { useState } from "react";
 import AddTaskModal from "../components/tasks/AddTaskModal";
+import { useSelector } from "react-redux";
 
 const Tasks = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { Tasks } = useSelector((state) => state.taskSlice);
+
   return (
     <div className="h-screen grid grid-cols-12">
       <div className="col-span-9 px-10 pt-10">
@@ -21,9 +24,14 @@ const Tasks = () => {
               <BellIcon className="h-6 w-6" />
             </button>
 
-            <button onClick={()=>setIsOpen(!isOpen)} className="btn btn-primary">Add Task</button>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="btn btn-primary"
+            >
+              Add Task
+            </button>
 
-           <AddTaskModal isOpen={isOpen} setIsOpen={setIsOpen}/>
+            <AddTaskModal isOpen={isOpen} setIsOpen={setIsOpen} />
 
             <div className="h-10 w-10 rounded-xl overflow-hidden">
               <img
