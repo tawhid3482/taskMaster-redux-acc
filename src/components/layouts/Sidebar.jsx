@@ -53,6 +53,16 @@ const Sidebar = () => {
         >
           <UserCircleIcon className="h-7 w-7 group-hover:text-white " />
         </NavLink>
+        <NavLink
+          to="/feed"
+          className={({ isActive }) =>
+            isActive
+              ? 'p-2 rounded-2xl bg-primary text-white cursor-pointer mt-auto'
+              : 'p-2 rounded-2xl group hover:bg-primary text-secondary/40 cursor-pointer transition-all  mt-auto'
+          }
+        >
+          <UserCircleIcon className="h-7 w-7 group-hover:text-white " />
+        </NavLink>
       </div>
     </div>
   );
