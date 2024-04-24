@@ -8,18 +8,21 @@ import { updateStatus, userTasks } from "../../redux/features/task/taskSlice";
 import TasksDetailsModal from "./tasksDetailsModal";
 
 const MyTasks = () => {
-  const {tasks, userSpecificTasks } = useSelector((state) => state.taskSlice);
+  const { tasks, userSpecificTasks } = useSelector((state) => state.taskSlice);
   const { name: userName } = useSelector((state) => state.userSlice);
 
   const dispatch = useDispatch();
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [taskId, setTaskId] = useState(0);
+  const handleModal = (id) => {
+    setTaskId(id);
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     dispatch(userTasks(userName));
-  }, [userName, dispatch,tasks]);
+  }, [userName, dispatch, tasks]);
 
-  const [isOpen,setIsOpen ]=useState(false)
-  const [taskId, setTaskId]=useState(0)
   return (
     <div>
       <TasksDetailsModal isOpen={isOpen} setIsOpen={setIsOpen} id={taskId} />
@@ -32,10 +35,20 @@ const MyTasks = () => {
           >
             <h1>{item.title}</h1>
             <div className="flex gap-3">
-              <button onClick={()=>setIsOpen(!isOpen)} className="grid place-content-center" title="Details">
+              <button
+                onClick={() => handleModal(item?.id)}
+                className="grid place-content-center"
+                title="Details"
+              >
                 <DocumentMagnifyingGlassIcon className="w-5 h-5 text-primary" />
               </button>
-              <button onClick={()=>dispatch(updateStatus({id:item.id, status:'done'}))} className="grid place-content-center" title="Done">
+              <button
+                onClick={() =>
+                  dispatch(updateStatus({ id: item.id, status: "done" }))
+                }
+                className="grid place-content-center"
+                title="Done"
+              >
                 <CheckIcon className="w-5 h-5 text-primary" />
               </button>
             </div>
