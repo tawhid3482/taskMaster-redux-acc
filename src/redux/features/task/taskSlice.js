@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   tasks: [
     {
-      id: "1",
-      title: "name",
-      status: "pending",
-      assignTo: "tawhidul islam",
+      id:'1',
+      title: "Programing-Hero Student batch-3",
+      description: "Tawhidul Islam Saikat",
+      date: "2024-04-18",
+      assignTo: "tawhid",
+      priority: "High",
+      status:'pending'
     },
   ],
   userSpecificTasks: [],
@@ -34,7 +37,9 @@ const taskSlice = createSlice({
       target.status = payload.status;
     },
     userTasks: (state, { payload }) => {
-      state.userTasks = state.tasks.filter((item) => item.assignTo === payload);
+      state.userSpecificTasks = state.tasks.filter(
+        (item) => item.assignTo === payload
+      );
     },
   },
 });
